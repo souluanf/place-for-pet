@@ -17,7 +17,5 @@ public class Agenda {
     private Long id;
     private LocalDateTime dataEntrada;
     private LocalDateTime dataSaida;
-    @ManyToOne
-    @JoinColumn(name = "pet_id")
-    private Pet pet;
+//*    private Pet pet;
 }

@@ -20,11 +20,8 @@ public class Cliente {
     private Long id;
     private String nome;
     private String endereco;
-    @ElementCollection
     private List<String> telefone;
-    @ElementCollection
     private List<String> email;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "cliente")
-    private Pet pet;
+ //    private Pet pet;
 }
 

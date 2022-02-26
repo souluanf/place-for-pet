@@ -24,7 +24,5 @@ public class Pet {
     private PorteEnum porte;
     private TemperamentoEnum temperamento;
     private Date proximoVencimentoVacina;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pet_id")
-    private Cliente cliente;
+//    private Cliente cliente;
 }
