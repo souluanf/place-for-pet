@@ -1,5 +1,6 @@
 package com.fiap.placeforpet.domain.entity;
 
+import com.fiap.placeforpet.domain.dto.ClienteDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,15 @@ public class Cliente {
     private String endereco;
     private List<String> telefone;
     private List<String> email;
+
+    public Cliente (ClienteDto clienteDto) {
+    this.nome = clienteDto.getNome();
+    this.endereco = clienteDto.getEndereco();
+    this.telefone = clienteDto.getTelefone();
+    this.email = clienteDto.getEmail();
+
+
+    }
  //    private Pet pet;
 }
 
