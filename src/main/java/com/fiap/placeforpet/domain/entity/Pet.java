@@ -15,7 +15,6 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "pet")
 public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,5 +23,7 @@ public class Pet {
     private PorteEnum porte;
     private TemperamentoEnum temperamento;
     private Date proximoVencimentoVacina;
-//    private Cliente cliente;
+
+    @OneToOne(optional = false)
+    private Cliente cliente;
 }

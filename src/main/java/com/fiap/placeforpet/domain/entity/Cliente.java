@@ -14,24 +14,29 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "cliente")
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private String endereco;
+
+    @ElementCollection
     private List<String> telefone;
+
+    @ElementCollection
     private List<String> email;
 
-    public Cliente (ClienteDto clienteDto) {
-    this.nome = clienteDto.getNome();
-    this.endereco = clienteDto.getEndereco();
-    this.telefone = clienteDto.getTelefone();
-    this.email = clienteDto.getEmail();
+    @OneToOne(mappedBy = "cliente",optional = false)
+    private Pet pet;
 
+    @OneToOne(optional = false)
+    private Endereco endereco;
 
+    public Cliente(ClienteDto clienteDto) {
+        this.nome = clienteDto.getNome();
+        this.endereco = clienteDto.getEndereco();
+        this.telefone = clienteDto.getTelefone();
+        this.email = clienteDto.getEmail();
     }
- //    private Pet pet;
 }
 
