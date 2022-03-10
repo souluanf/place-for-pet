@@ -1,12 +1,12 @@
 package com.fiap.placeforpet.domain.entity;
 
+import com.fiap.placeforpet.domain.dto.EnderecoDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,14 +21,18 @@ public class Endereco {
     private String cep;
     private String cidade;
     private String uf;
-    @OneToOne(mappedBy = "endereco", optional = false)
-    private Cliente cliente;
 
-    public Cliente getCliente() {
-        return cliente;
-    }
+    @OneToOne(mappedBy = "cliente",optional = false)
+    private Pet pet;
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    @OneToOne(optional = false)
+    private Endereco endereco;
+
+    public Endereco(EnderecoDto enderecoDto) {
+        this.lougadouro = enderecoDto.getLougadouro();
+        this.complemento = enderecoDto.getComplemento();
+        this.cep = enderecoDto.getCep();
+        this.cidade = enderecoDto.getCidade();
+        this.uf = enderecoDto.getUf();
     }
 }
