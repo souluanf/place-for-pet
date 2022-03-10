@@ -3,6 +3,7 @@ package com.fiap.placeforpet.controller;
 import com.fiap.placeforpet.domain.dto.ClienteDto;
 import com.fiap.placeforpet.domain.entity.Cliente;
 import com.fiap.placeforpet.service.ClienteService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,8 +41,10 @@ public class ClienteController {
     }
 
     @DeleteMapping(value = "{id}")
-    public void deleteCliente(@PathVariable String id) {
-        
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCliente(@PathVariable Long id) {
+        clienteService.delete(id);
+
     }
 
 }

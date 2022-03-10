@@ -32,7 +32,9 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public void delete(Cliente cliente) {
+    public void delete(long id) {
+        this.getById(id);
+        clienteRepository.deleteById(id);
 
     }
 
