@@ -29,7 +29,7 @@ public class AgendaController {
         return agendaService.getById(id);
     }
 
-    @PostMappinggis
+    @PostMapping
     public AgendaDto insertAgenda(@RequestBody AgendaDto agendaDto) {
         return agendaService.create(new Agenda(agendaDto));
     }
