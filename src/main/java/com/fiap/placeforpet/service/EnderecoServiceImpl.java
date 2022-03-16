@@ -4,7 +4,9 @@ import com.fiap.placeforpet.domain.dto.EnderecoDto;
 import com.fiap.placeforpet.domain.entity.Endereco;
 import com.fiap.placeforpet.repository.EnderecoRepository;
 import com.fiap.placeforpet.service.exception.ObjectNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +37,6 @@ public class EnderecoServiceImpl implements EnderecoService {
     public void delete(long id) {
         this.getById(id);
         enderecoRepository.deleteById(id);
-
     }
 
     @Override
@@ -47,6 +48,6 @@ public class EnderecoServiceImpl implements EnderecoService {
     @Override
     public EnderecoDto getById(long id) {
         Optional<Endereco> optionalEnderecoDto = enderecoRepository.findById(id);
-        return optionalEnderecoDto.map(EnderecoDto::new).orElseThrow(() -> new ObjectNotFoundException("Objeto Não Encontrado"));
+        return optionalEnderecoDto.map(EnderecoDto::new).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 }

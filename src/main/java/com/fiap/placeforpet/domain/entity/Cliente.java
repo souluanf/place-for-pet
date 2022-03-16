@@ -15,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 public class Cliente {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,8 +27,9 @@ public class Cliente {
     @ElementCollection
     private List<String> email;
 
-    @OneToOne(mappedBy = "cliente",optional = false)
-    private Pet pet;
+    @OneToMany
+    @JoinColumn(name = "pet_id")
+    private List<Pet> pet;
 
     @OneToOne(optional = false)
     private Endereco endereco;

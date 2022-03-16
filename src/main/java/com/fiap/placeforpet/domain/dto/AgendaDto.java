@@ -13,10 +13,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AgendaDto {
+
     private LocalDateTime dataentrada;
     private LocalDateTime datasaida;
+
     public  AgendaDto(Agenda agenda) {
-        this.dataentrada = agenda.getDataentrada();
+        this.dataentrada = agenda.getDataEntrada();
         this.datasaida = agenda.getDataSaida();
     }
 }

@@ -11,9 +11,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PrecoDto {
-    private double valorhora;
+
+    private double valorHora;
 
     public  PrecoDto(Preco preco) {
-        this.valorhora = preco.getValorHora();
+        this.valorHora = preco.getValorHora();
             }
 }

@@ -6,10 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
@@ -18,16 +15,28 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 public class Agenda {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDateTime dataentrada;
+
+    private LocalDateTime dataEntrada;
     private LocalDateTime dataSaida;
-//*    private Pet pet;
+
+    @ManyToOne
+    @JoinColumn(name = "pet_id")
+    private Pet pet;
+
+    @OneToOne
+    @JoinColumn(name = "espaco_id")
+    private Espaco espaco;
+
+    @OneToOne
+    @JoinColumn(name = "preco_id")
+    private Preco preco;
 
     public Agenda(AgendaDto agendaDto) {
-
-        this.dataentrada = agendaDto.getDataentrada();
+        this.dataEntrada = agendaDto.getDataentrada();
         this.dataSaida   = agendaDto.getDatasaida();
     }
 }

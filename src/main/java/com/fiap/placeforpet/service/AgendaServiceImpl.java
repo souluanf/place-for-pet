@@ -4,7 +4,9 @@ import com.fiap.placeforpet.domain.dto.AgendaDto;
 import com.fiap.placeforpet.domain.entity.Agenda;
 import com.fiap.placeforpet.repository.AgendaRepository;
 import com.fiap.placeforpet.service.exception.ObjectNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +37,6 @@ public class AgendaServiceImpl implements AgendaService {
     public void delete(long id) {
         this.getById(id);
         agendaRepository.deleteById(id);
-
     }
 
     @Override
@@ -47,6 +48,6 @@ public class AgendaServiceImpl implements AgendaService {
     @Override
     public AgendaDto getById(long id) {
         Optional<Agenda> optionalAgendaDto = agendaRepository.findById(id);
-        return optionalAgendaDto.map(AgendaDto::new).orElseThrow(() -> new ObjectNotFoundException("Objeto Não Encontrado"));
+        return optionalAgendaDto.map(AgendaDto::new).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 }

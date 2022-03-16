@@ -5,7 +5,9 @@ import com.fiap.placeforpet.domain.dto.EspacoDto;
 import com.fiap.placeforpet.domain.entity.Espaco;
 import com.fiap.placeforpet.repository.EspacoRepository;
 import com.fiap.placeforpet.service.exception.ObjectNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,7 +38,6 @@ public class EspacoServiceImpl implements EspacoService {
     public void delete(long id) {
         this.getById(id);
         espacoRepository.deleteById(id);
-
     }
 
     @Override
@@ -48,6 +49,6 @@ public class EspacoServiceImpl implements EspacoService {
     @Override
     public EspacoDto getById(long id) {
         Optional<Espaco> optionalEspacoDto = espacoRepository.findById(id);
-        return optionalEspacoDto.map(EspacoDto::new).orElseThrow(() -> new ObjectNotFoundException("Objeto Não Encontrado"));
+        return optionalEspacoDto.map(EspacoDto::new).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 }

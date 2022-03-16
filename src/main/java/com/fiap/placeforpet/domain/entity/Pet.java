@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,22 +18,28 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 public class Pet {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nomepet;
+
+    private String nomePet;
     private String raca;
     private PorteEnum porte;
     private TemperamentoEnum temperamento;
     private Date proximoVencimentoVacina;
 
-    @OneToOne(optional = false)
+    @OneToMany
+    @JoinColumn(name = "agenda_id")
+    private List<Agenda> agenda;
+
+    @ManyToOne(optional = false)
     private Cliente cliente;
 
     public Pet(PetDto petDto) {
-        this.nomepet      = petDto.getNomepet();
-        this.raca         = petDto.getRaca();
-        this.porte        = petDto.getPorte();
+        this.nomePet = petDto.getNomePet();
+        this.raca = petDto.getRaca();
+        this.porte = petDto.getPorte();
         this.temperamento = petDto.getTemperamento();
         this.proximoVencimentoVacina = petDto.getProximoVencimentoVacina();
     }

@@ -4,7 +4,9 @@ import com.fiap.placeforpet.domain.dto.ClienteDto;
 import com.fiap.placeforpet.domain.entity.Cliente;
 import com.fiap.placeforpet.repository.ClienteRepository;
 import com.fiap.placeforpet.service.exception.ObjectNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +37,6 @@ public class ClienteServiceImpl implements ClienteService {
     public void delete(long id) {
         this.getById(id);
         clienteRepository.deleteById(id);
-
     }
 
     @Override
@@ -47,6 +48,6 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public ClienteDto getById(long id) {
         Optional<Cliente> optionalClienteDto = clienteRepository.findById(id);
-        return optionalClienteDto.map(ClienteDto::new).orElseThrow(() -> new ObjectNotFoundException("Objeto Não Encontrado"));
+        return optionalClienteDto.map(ClienteDto::new).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 }

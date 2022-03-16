@@ -14,17 +14,16 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class PetDto {
 
-    private String nomepet;
+    private String nomePet;
     private String raca;
     private PorteEnum porte;
     private TemperamentoEnum temperamento;
     private Date proximoVencimentoVacina;
 
     public PetDto(Pet pet) {
-        this.nomepet = pet.getNomepet();
+        this.nomePet = pet.getNomePet();
         this.raca = pet.getRaca();
         this.porte = pet.getPorte();
         this.temperamento = pet.getTemperamento();

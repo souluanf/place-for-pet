@@ -11,6 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EspacoDto {
+
     private Integer capacidade;
 
     public  EspacoDto(Espaco espaco) {
