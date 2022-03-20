@@ -4,8 +4,9 @@ package com.fiap.placeforpet.service;
 import com.fiap.placeforpet.domain.dto.PetDto;
 import com.fiap.placeforpet.domain.entity.Pet;
 import com.fiap.placeforpet.repository.PetRepository;
-import com.fiap.placeforpet.service.exception.ObjectNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -48,6 +49,6 @@ public class PetServiceImpl implements PetService {
     @Override
     public PetDto getById(long id) {
         Optional<Pet> optionalPetDto = petRepository.findById(id);
-        return optionalPetDto.map(PetDto::new).orElseThrow(() -> new ObjectNotFoundException("Objeto Não Encontrado"));
+        return optionalPetDto.map(PetDto::new).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 }

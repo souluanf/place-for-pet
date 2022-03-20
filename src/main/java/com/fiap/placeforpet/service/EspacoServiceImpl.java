@@ -4,11 +4,11 @@ package com.fiap.placeforpet.service;
 import com.fiap.placeforpet.domain.dto.EspacoDto;
 import com.fiap.placeforpet.domain.entity.Espaco;
 import com.fiap.placeforpet.repository.EspacoRepository;
-import com.fiap.placeforpet.service.exception.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -50,5 +50,13 @@ public class EspacoServiceImpl implements EspacoService {
     public EspacoDto getById(long id) {
         Optional<Espaco> optionalEspacoDto = espacoRepository.findById(id);
         return optionalEspacoDto.map(EspacoDto::new).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
+    @Override
+    public Integer getCapacidadeByData(LocalDate data) {
+        Espaco espaco = espacoRepository.findByData(data);
+        if (espaco==null)
+            espaco = espacoRepository.save(new Espaco(data));
+        return espaco.getCapacidade();
     }
 }

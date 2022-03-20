@@ -3,7 +3,7 @@ package com.fiap.placeforpet.service;
 import com.fiap.placeforpet.domain.dto.AgendaDto;
 import com.fiap.placeforpet.domain.entity.Agenda;
 import com.fiap.placeforpet.repository.AgendaRepository;
-import com.fiap.placeforpet.service.exception.ObjectNotFoundException;
+import com.fiap.placeforpet.service.exception.ScheduleUnavailableException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -16,14 +16,20 @@ import java.util.stream.Collectors;
 public class AgendaServiceImpl implements AgendaService {
 
     private final AgendaRepository agendaRepository;
+    private final EspacoService espacoService;
 
-    public AgendaServiceImpl(AgendaRepository agendaRepository) {
+    public AgendaServiceImpl(AgendaRepository agendaRepository, EspacoService espacoService) {
         this.agendaRepository = agendaRepository;
+        this.espacoService = espacoService;
     }
 
     @Override
     public AgendaDto create(Agenda agenda) {
-        return new AgendaDto(agendaRepository.save(agenda));
+        if (espacoService.getCapacidadeByData(agenda.getDataAgenda())>0)
+            agenda = agendaRepository.save(agenda);
+        else
+            throw new ResponseStatusException(HttpStatus.OK,"Agenda Lotada");
+        return new AgendaDto(agenda);
     }
 
 
@@ -50,4 +56,6 @@ public class AgendaServiceImpl implements AgendaService {
         Optional<Agenda> optionalAgendaDto = agendaRepository.findById(id);
         return optionalAgendaDto.map(AgendaDto::new).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
+
+
 }

@@ -3,7 +3,6 @@ package com.fiap.placeforpet.service;
 import com.fiap.placeforpet.domain.dto.EnderecoDto;
 import com.fiap.placeforpet.domain.entity.Endereco;
 import com.fiap.placeforpet.repository.EnderecoRepository;
-import com.fiap.placeforpet.service.exception.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;

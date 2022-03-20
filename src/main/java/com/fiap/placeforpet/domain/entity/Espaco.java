@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -20,9 +21,15 @@ public class Espaco {
     private Long id;
 
     private Integer capacidade;
+    private LocalDate data;
 
     public Espaco(EspacoDto espacoDto) {
         this.capacidade = espacoDto.getCapacidade();
+        this.data = espacoDto.getData();
     }
 
+    public Espaco(LocalDate data){
+        this.data = data;
+        this.capacidade = 20;
+    }
 }

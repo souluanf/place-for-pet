@@ -3,7 +3,6 @@ package com.fiap.placeforpet.service;
 import com.fiap.placeforpet.domain.dto.ClienteDto;
 import com.fiap.placeforpet.domain.entity.Cliente;
 import com.fiap.placeforpet.repository.ClienteRepository;
-import com.fiap.placeforpet.service.exception.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;

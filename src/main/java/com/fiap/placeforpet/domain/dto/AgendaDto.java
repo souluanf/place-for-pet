@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -14,11 +15,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class AgendaDto {
 
-    private LocalDateTime dataentrada;
-    private LocalDateTime datasaida;
+    private LocalDate dataAgenda;
 
     public  AgendaDto(Agenda agenda) {
-        this.dataentrada = agenda.getDataEntrada();
-        this.datasaida = agenda.getDataSaida();
+        this.dataAgenda = agenda.getDataAgenda();
     }
 }
