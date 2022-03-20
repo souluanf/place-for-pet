@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class Pet {
     private String raca;
     private PorteEnum porte;
     private TemperamentoEnum temperamento;
-    private Date proximoVencimentoVacina;
+    private LocalDate proximoVencimentoVacina;
 
     @OneToMany
     @JoinColumn(name = "agenda_id")

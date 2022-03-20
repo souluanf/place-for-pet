@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -20,7 +21,7 @@ public class PetDto {
     private String raca;
     private PorteEnum porte;
     private TemperamentoEnum temperamento;
-    private Date proximoVencimentoVacina;
+    private LocalDate proximoVencimentoVacina;
 
     public PetDto(Pet pet) {
         this.nomePet = pet.getNomePet();

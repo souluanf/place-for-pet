@@ -3,7 +3,6 @@ package com.fiap.placeforpet.service;
 import com.fiap.placeforpet.domain.dto.AgendaDto;
 import com.fiap.placeforpet.domain.entity.Agenda;
 import com.fiap.placeforpet.repository.AgendaRepository;
-import com.fiap.placeforpet.service.exception.ScheduleUnavailableException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
