@@ -28,7 +28,7 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente")
     private List<Pet> pet;
 
-    @OneToOne
+    @OneToOne(mappedBy = "cliente")
     private Endereco endereco;
 }
 
