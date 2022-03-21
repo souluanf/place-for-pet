@@ -1,5 +1,6 @@
 package com.fiap.placeforpet.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,7 @@ public class Endereco {
     private String cidade;
     private String uf;
 
+    @JsonIgnore
     @OneToOne(optional = false)
     private Cliente cliente;
 }

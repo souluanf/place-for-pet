@@ -1,6 +1,5 @@
 package com.fiap.placeforpet.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +22,7 @@ public class Pet {
     private String nome;
     private String raca;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "pet")
     private List<Agenda> agenda;
 

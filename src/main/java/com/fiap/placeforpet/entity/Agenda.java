@@ -1,5 +1,6 @@
 package com.fiap.placeforpet.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +20,7 @@ public class Agenda {
     private LocalDate data;
 
 
+    @JsonIgnore
     @JoinColumn(name = "ID_PET")
     @ManyToOne(fetch = FetchType.EAGER)
     private Pet pet;
