@@ -1,5 +1,6 @@
-package com.fiap.placeforpet.domain.entity;
+package com.fiap.placeforpet.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,24 +21,14 @@ public class Cliente {
     private Long id;
     private String nome;
 
-    @ElementCollection
-    private List<String> telefone;
+    private String telefone;
+    private String email;
 
-    @ElementCollection
-    private List<String> email;
-
-    @OneToMany
-    @JoinColumn(name = "pet_id")
+    @JsonIgnore
+    @OneToMany(mappedBy = "cliente")
     private List<Pet> pet;
 
     @OneToOne
     private Endereco endereco;
-
-    public Cliente(Cliente cliente) {
-        this.nome = cliente.getNome();
-        this.endereco = cliente.getEndereco();
-        this.telefone = cliente.getTelefone();
-        this.email = cliente.getEmail();
-    }
 }
 

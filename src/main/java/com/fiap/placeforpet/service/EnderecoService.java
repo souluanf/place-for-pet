@@ -1,7 +1,7 @@
 package com.fiap.placeforpet.service;
 
-import com.fiap.placeforpet.domain.dto.EnderecoDto;
-import com.fiap.placeforpet.domain.entity.Endereco;
+import com.fiap.placeforpet.dto.EnderecoDto;
+import com.fiap.placeforpet.entity.Endereco;
 
 import java.util.List;
 public interface EnderecoService {

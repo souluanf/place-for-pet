@@ -1,7 +1,7 @@
 package com.fiap.placeforpet.service;
 
-import com.fiap.placeforpet.domain.dto.PetDto;
-import com.fiap.placeforpet.domain.entity.Pet;
+import com.fiap.placeforpet.dto.PetDto;
+import com.fiap.placeforpet.entity.Pet;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.fiap.placeforpet.domain.dto;
+package com.fiap.placeforpet.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,8 +11,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EspacoDto {
+public class AgendaDto {
 
-    private Integer capacidade;
-    private LocalDate data;
+    private LocalDate dataAgenda;
 }

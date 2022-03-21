@@ -1,12 +1,9 @@
-package com.fiap.placeforpet.domain.dto;
+package com.fiap.placeforpet.dto;
 
-import com.fiap.placeforpet.domain.entity.Endereco;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
 
 @Getter
 @Setter
@@ -15,7 +12,6 @@ import java.util.List;
 public class ClienteDto {
 
     private String nome;
-    private Endereco endereco;
-    private List<String> telefone;
-    private List<String> email;
+    private String telefone;
+    private String email;
 }
