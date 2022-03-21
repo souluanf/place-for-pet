@@ -15,36 +15,42 @@ public class EspacoController {
     private final EspacoService espacoService;
 
     public EspacoController(EspacoService espacoService) {
+
         this.espacoService = espacoService;
     }
 
-    @GetMapping
-    public List<EspacoDto> getAllEspaco() {
-        return espacoService.getAll();
-    }
-
     @GetMapping(value = "{id}")
-    public EspacoDto findById(@PathVariable Long id) {
+    public Espaco findById(@PathVariable Long id) {
+
         return espacoService.getById(id);
     }
 
+    @GetMapping
+    public List<Espaco> getAll() {
+
+        return espacoService.getAll();
+    }
+
     @PostMapping
-    public EspacoDto insertEspaco(@RequestBody EspacoDto espacoDto) {
-        return espacoService.create(new Espaco(espacoDto));
+    @ResponseStatus(HttpStatus.CREATED)
+    public Espaco create(
+            @RequestBody EspacoDto espacoDto) {
+
+        return espacoService.create(espacoDto);
     }
 
     @PutMapping(value = "{id}")
-    public EspacoDto updateEspaco(@RequestBody EspacoDto espacoDto, @PathVariable Long id) {
-        Espaco espaco = new Espaco(espacoDto);
-        espaco.setId(id);
+    public Espaco update(
+            @RequestBody Espaco espaco)   {
         return espacoService.update(espaco);
     }
 
     @DeleteMapping(value = "{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteEspaco(@PathVariable Long id) {
-        espacoService.delete(id);
+    public void delete(
+            @PathVariable Long id)  {
 
+        espacoService.delete(id);
     }
 
 }

@@ -6,13 +6,10 @@ import com.fiap.placeforpet.domain.entity.Pet;
 import java.util.List;
 
 public interface PetService {
-    PetDto create(Pet pet);
 
-    PetDto update(Pet pet);
-
-    void delete(long id);
-
-    List<PetDto> getAll();
-
-    PetDto getById(long id);
+    Pet create(PetDto petDto);
+    Pet update(Pet pet);
+    void delete(Long id);
+    List<Pet> getAll();
+    Pet getById(Long id);
 }

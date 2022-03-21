@@ -6,9 +6,9 @@ import com.fiap.placeforpet.domain.entity.Agenda;
 import java.util.List;
 
 public interface AgendaService {
-    AgendaDto create(Agenda agenda);
-    AgendaDto update(Agenda agenda);
-    void delete (long id);
-    List<AgendaDto>getAll();
-    AgendaDto getById(long id);
+    Agenda create(AgendaDto agendaDto);
+    Agenda update(Agenda agenda);
+    void delete (Long id);
+    List<Agenda>getAll();
+    Agenda getById(Long id);
 }

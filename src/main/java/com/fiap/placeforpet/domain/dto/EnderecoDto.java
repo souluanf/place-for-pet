@@ -1,6 +1,5 @@
 package com.fiap.placeforpet.domain.dto;
 
-import com.fiap.placeforpet.domain.entity.Endereco;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,14 +17,5 @@ public class EnderecoDto {
     private String cidade;
     private String bairro;
     private String uf;
-
-    public EnderecoDto(Endereco endereco) {
-        this.lougadouro = endereco.getLougadouro();
-        this.complemento = endereco.getComplemento();
-        this.cep = endereco.getCep();
-        this.cidade = endereco.getCidade();
-        this.bairro = endereco.getBairro();
-        this.uf = endereco.getUf();
-    }
 
 }

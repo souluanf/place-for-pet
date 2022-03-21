@@ -1,5 +1,6 @@
 package com.fiap.placeforpet.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fiap.placeforpet.domain.dto.AgendaDto;
 import com.fiap.placeforpet.domain.entity.Agenda;
 import com.fiap.placeforpet.repository.AgendaRepository;
@@ -8,53 +9,57 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class AgendaServiceImpl implements AgendaService {
 
-    private final AgendaRepository agendaRepository;
-    private final EspacoService espacoService;
+    private AgendaRepository agendaRepository;
+    private ObjectMapper objectMapper;
 
-    public AgendaServiceImpl(AgendaRepository agendaRepository, EspacoService espacoService) {
+    public AgendaServiceImpl(
+            AgendaRepository agendaRepository,
+            ObjectMapper objectMapper
+    ){
         this.agendaRepository = agendaRepository;
-        this.espacoService = espacoService;
+        this.objectMapper = objectMapper;
     }
 
     @Override
-    public AgendaDto create(Agenda agenda) {
-        if (espacoService.getCapacidadeByData(agenda.getDataAgenda())>0)
-            agenda = agendaRepository.save(agenda);
-        else
-            throw new ResponseStatusException(HttpStatus.OK,"Agenda Lotada");
-        return new AgendaDto(agenda);
+    public Agenda getById(Long id) {
+
+        Agenda agenda = getAgendaById(id);
+        return new Agenda(agenda);
     }
 
+    @Override
+    public List<Agenda> getAll() {
+        List<Agenda> agendaList = agendaRepository.findAll();
+        return agendaList.stream().map(Agenda::new).collect(Collectors.toList());
+    }
 
-    public AgendaDto update(Agenda agenda) {
+    @Override
+    public Agenda create(AgendaDto agendaDto) {
+
+        Agenda agenda = objectMapper.convertValue(agendaDto, Agenda.class);
+        Agenda agendaSaved = agendaRepository.save(agenda);
+        return new Agenda(agendaSaved);
+    }
+
+    public Agenda update(Agenda agenda) {
         this.getById(agenda.getId());
         Agenda save = agendaRepository.save(agenda);
-        return new AgendaDto(save);
+        return save;
     }
 
     @Override
-    public void delete(long id) {
-        this.getById(id);
+    public void delete(Long id) {
+        Agenda agenda = getAgendaById(id);
         agendaRepository.deleteById(id);
     }
 
-    @Override
-    public List<AgendaDto> getAll() {
-        List<Agenda> agendaList = agendaRepository.findAll();
-        return agendaList.stream().map(AgendaDto::new).collect(Collectors.toList());
+    private Agenda getAgendaById(Long id) {
+        return agendaRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "agenda.nao.encontrada"));
     }
-
-    @Override
-    public AgendaDto getById(long id) {
-        Optional<Agenda> optionalAgendaDto = agendaRepository.findById(id);
-        return optionalAgendaDto.map(AgendaDto::new).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-    }
-
-
 }

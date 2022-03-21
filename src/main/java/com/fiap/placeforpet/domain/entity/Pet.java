@@ -1,6 +1,5 @@
 package com.fiap.placeforpet.domain.entity;
 
-import com.fiap.placeforpet.domain.dto.PetDto;
 import com.fiap.placeforpet.domain.enums.PorteEnum;
 import com.fiap.placeforpet.domain.enums.TemperamentoEnum;
 import lombok.AllArgsConstructor;
@@ -10,7 +9,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -37,12 +35,12 @@ public class Pet {
     @ManyToOne(optional = false)
     private Cliente cliente;
 
-    public Pet(PetDto petDto) {
-        this.nomePet = petDto.getNomePet();
-        this.raca = petDto.getRaca();
-        this.porte = petDto.getPorte();
-        this.temperamento = petDto.getTemperamento();
-        this.proximoVencimentoVacina = petDto.getProximoVencimentoVacina();
+    public Pet(Pet pet) {
+        this.nomePet = pet.getNomePet();
+        this.raca = pet.getRaca();
+        this.porte = pet.getPorte();
+        this.temperamento = pet.getTemperamento();
+        this.proximoVencimentoVacina = pet.getProximoVencimentoVacina();
     }
 }
 

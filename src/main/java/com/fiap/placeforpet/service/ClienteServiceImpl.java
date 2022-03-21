@@ -1,5 +1,6 @@
 package com.fiap.placeforpet.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fiap.placeforpet.domain.dto.ClienteDto;
 import com.fiap.placeforpet.domain.entity.Cliente;
 import com.fiap.placeforpet.repository.ClienteRepository;
@@ -8,45 +9,57 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class ClienteServiceImpl implements ClienteService {
 
-    private final ClienteRepository clienteRepository;
+    private ClienteRepository clienteRepository;
+    private ObjectMapper objectMapper;
 
-    public ClienteServiceImpl(ClienteRepository clienteRepository) {
+    public ClienteServiceImpl(
+            ClienteRepository clienteRepository,
+            ObjectMapper objectMapper
+    ){
         this.clienteRepository = clienteRepository;
+        this.objectMapper = objectMapper;
     }
 
     @Override
-    public ClienteDto create(Cliente cliente) {
-        return new ClienteDto(clienteRepository.save(cliente));
+    public Cliente getById(Long id) {
+
+        Cliente cliente = getClienteById(id);
+        return new Cliente(cliente);
     }
 
+    @Override
+    public List<Cliente> getAll() {
+        List<Cliente> clienteList = clienteRepository.findAll();
+        return clienteList.stream().map(Cliente::new).collect(Collectors.toList());
+    }
 
-    public ClienteDto update(Cliente cliente) {
+    @Override
+    public Cliente create(ClienteDto clienteDto) {
+
+        Cliente cliente = objectMapper.convertValue(clienteDto, Cliente.class);
+        Cliente clienteSaved = clienteRepository.save(cliente);
+        return new Cliente(clienteSaved);
+    }
+
+    public Cliente update(Cliente cliente) {
         this.getById(cliente.getId());
         Cliente save = clienteRepository.save(cliente);
-        return new ClienteDto(save);
+        return save;
     }
 
     @Override
-    public void delete(long id) {
-        this.getById(id);
+    public void delete(Long id) {
+        Cliente cliente = getClienteById(id);
         clienteRepository.deleteById(id);
     }
 
-    @Override
-    public List<ClienteDto> getAll() {
-        List<Cliente> clienteList = clienteRepository.findAll();
-        return clienteList.stream().map(ClienteDto::new).collect(Collectors.toList());
-    }
-
-    @Override
-    public ClienteDto getById(long id) {
-        Optional<Cliente> optionalClienteDto = clienteRepository.findById(id);
-        return optionalClienteDto.map(ClienteDto::new).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    private Cliente getClienteById(Long id) {
+        return clienteRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "cliente.nao.encontrada"));
     }
 }

@@ -6,9 +6,9 @@ import com.fiap.placeforpet.domain.entity.Cliente;
 import java.util.List;
 
 public interface ClienteService {
-    ClienteDto create(Cliente cliente);
-    ClienteDto update(Cliente cliente);
-    void delete (long id);
-    List<ClienteDto>getAll();
-    ClienteDto getById(long id);
+    Cliente create(ClienteDto clienteDto);
+    Cliente update(Cliente cliente);
+    void delete (Long id);
+    List<Cliente>getAll();
+    Cliente getById(Long id);
 }

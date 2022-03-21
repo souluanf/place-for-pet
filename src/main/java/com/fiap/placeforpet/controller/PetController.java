@@ -15,36 +15,42 @@ public class PetController {
     private final PetService petService;
 
     public PetController(PetService petService) {
+
         this.petService = petService;
     }
 
-    @GetMapping
-    public List<PetDto> getAllPet() {
-        return petService.getAll();
-    }
-
     @GetMapping(value = "{id}")
-    public PetDto findById(@PathVariable Long id) {
+    public Pet findById(@PathVariable Long id) {
+
         return petService.getById(id);
     }
 
+    @GetMapping
+    public List<Pet> getAll() {
+
+        return petService.getAll();
+    }
+
     @PostMapping
-    public PetDto insertPet(@RequestBody PetDto petDto) {
-        return petService.create(new Pet(petDto));
+    @ResponseStatus(HttpStatus.CREATED)
+    public Pet create(
+            @RequestBody PetDto petDto) {
+
+        return petService.create(petDto);
     }
 
     @PutMapping(value = "{id}")
-    public PetDto updatePet(@RequestBody PetDto petDto, @PathVariable Long id) {
-        Pet pet = new Pet(petDto);
-        pet.setId(id);
+    public Pet update(
+            @RequestBody Pet pet)   {
         return petService.update(pet);
     }
 
     @DeleteMapping(value = "{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletePet(@PathVariable Long id) {
-        petService.delete(id);
+    public void delete(
+            @PathVariable Long id)  {
 
+        petService.delete(id);
     }
 
 }

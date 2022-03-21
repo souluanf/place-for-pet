@@ -1,6 +1,5 @@
 package com.fiap.placeforpet.domain.entity;
 
-import com.fiap.placeforpet.domain.dto.ClienteDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,14 +30,14 @@ public class Cliente {
     @JoinColumn(name = "pet_id")
     private List<Pet> pet;
 
-    @OneToOne(optional = false)
+    @OneToOne
     private Endereco endereco;
 
-    public Cliente(ClienteDto clienteDto) {
-        this.nome = clienteDto.getNome();
-        this.endereco = clienteDto.getEndereco();
-        this.telefone = clienteDto.getTelefone();
-        this.email = clienteDto.getEmail();
+    public Cliente(Cliente cliente) {
+        this.nome = cliente.getNome();
+        this.endereco = cliente.getEndereco();
+        this.telefone = cliente.getTelefone();
+        this.email = cliente.getEmail();
     }
 }
 

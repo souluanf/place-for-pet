@@ -15,38 +15,42 @@ public class AgendaController {
     private final AgendaService agendaService;
 
     public AgendaController(AgendaService agendaService) {
+
         this.agendaService = agendaService;
     }
 
-    @GetMapping
-    public List<AgendaDto> getAllAgenda() {
-        return agendaService.getAll();
-    }
-
-
     @GetMapping(value = "{id}")
-    public AgendaDto findById(@PathVariable Long id) {
+    public Agenda findById(@PathVariable Long id) {
+
         return agendaService.getById(id);
     }
 
+    @GetMapping
+    public List<Agenda> getAll() {
+
+        return agendaService.getAll();
+    }
+
     @PostMapping
-    public AgendaDto insertAgenda(@RequestBody AgendaDto agendaDto) {
-        return agendaService.create(new Agenda(agendaDto));
+    @ResponseStatus(HttpStatus.CREATED)
+    public Agenda create(
+            @RequestBody AgendaDto agendaDto) {
+
+        return agendaService.create(agendaDto);
     }
 
     @PutMapping(value = "{id}")
-    public AgendaDto updateAgenda(@RequestBody AgendaDto agendaDto, @PathVariable Long id) {
-        Agenda agenda = new Agenda(agendaDto);
-        agenda.setId(id);
+    public Agenda update(
+            @RequestBody Agenda agenda)   {
         return agendaService.update(agenda);
     }
 
     @DeleteMapping(value = "{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteAgenda(@PathVariable Long id) {
-        agendaService.delete(id);
+    public void delete(
+            @PathVariable Long id)  {
 
+        agendaService.delete(id);
     }
 
 }
-

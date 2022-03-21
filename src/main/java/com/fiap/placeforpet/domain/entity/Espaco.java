@@ -1,12 +1,14 @@
 package com.fiap.placeforpet.domain.entity;
 
-import com.fiap.placeforpet.domain.dto.EspacoDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDate;
 
 @Getter
@@ -23,9 +25,9 @@ public class Espaco {
     private Integer capacidade;
     private LocalDate data;
 
-    public Espaco(EspacoDto espacoDto) {
-        this.capacidade = espacoDto.getCapacidade();
-        this.data = espacoDto.getData();
+    public Espaco(Espaco espaco) {
+        this.capacidade = espaco.getCapacidade();
+        this.data = espaco.getData();
     }
 
     public Espaco(LocalDate data){

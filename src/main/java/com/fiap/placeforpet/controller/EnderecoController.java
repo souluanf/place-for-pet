@@ -15,36 +15,42 @@ public class EnderecoController {
     private final EnderecoService enderecoService;
 
     public EnderecoController(EnderecoService enderecoService) {
+
         this.enderecoService = enderecoService;
     }
 
-    @GetMapping
-    public List<EnderecoDto> getAllEndereco() {
-        return enderecoService.getAll();
-    }
-
     @GetMapping(value = "{id}")
-    public EnderecoDto findById(@PathVariable Long id) {
+    public Endereco findById(@PathVariable Long id) {
+
         return enderecoService.getById(id);
     }
 
+    @GetMapping
+    public List<Endereco> getAll() {
+
+        return enderecoService.getAll();
+    }
+
     @PostMapping
-    public EnderecoDto insertEndereco(@RequestBody EnderecoDto enderecoDto) {
-        return enderecoService.create(new Endereco(enderecoDto));
+    @ResponseStatus(HttpStatus.CREATED)
+    public Endereco create(
+            @RequestBody EnderecoDto enderecoDto) {
+
+        return enderecoService.create(enderecoDto);
     }
 
     @PutMapping(value = "{id}")
-    public EnderecoDto updateEndereco(@RequestBody EnderecoDto enderecoDto, @PathVariable Long id) {
-        Endereco endereco = new Endereco(enderecoDto);
-        endereco.setId(id);
+    public Endereco update(
+            @RequestBody Endereco endereco)   {
         return enderecoService.update(endereco);
     }
 
     @DeleteMapping(value = "{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteEndereco(@PathVariable Long id) {
-        enderecoService.delete(id);
+    public void delete(
+            @PathVariable Long id)  {
 
+        enderecoService.delete(id);
     }
 
 }

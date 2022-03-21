@@ -15,36 +15,42 @@ public class ClienteController {
     private final ClienteService clienteService;
 
     public ClienteController(ClienteService clienteService) {
+
         this.clienteService = clienteService;
     }
 
-    @GetMapping
-    public List<ClienteDto> getAllCliente() {
-        return clienteService.getAll();
-    }
-
     @GetMapping(value = "{id}")
-    public ClienteDto findById(@PathVariable Long id) {
+    public Cliente findById(@PathVariable Long id) {
+
         return clienteService.getById(id);
     }
 
+    @GetMapping
+    public List<Cliente> getAll() {
+
+        return clienteService.getAll();
+    }
+
     @PostMapping
-    public ClienteDto insertCliente(@RequestBody ClienteDto clienteDto) {
-        return clienteService.create(new Cliente(clienteDto));
+    @ResponseStatus(HttpStatus.CREATED)
+    public Cliente create(
+            @RequestBody ClienteDto clienteDto) {
+
+        return clienteService.create(clienteDto);
     }
 
     @PutMapping(value = "{id}")
-    public ClienteDto updateCliente(@RequestBody ClienteDto clienteDto, @PathVariable Long id) {
-        Cliente cliente = new Cliente(clienteDto);
-        cliente.setId(id);
+    public Cliente update(
+            @RequestBody Cliente cliente)   {
         return clienteService.update(cliente);
     }
 
     @DeleteMapping(value = "{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCliente(@PathVariable Long id) {
-        clienteService.delete(id);
+    public void delete(
+            @PathVariable Long id)  {
 
+        clienteService.delete(id);
     }
 
 }
