@@ -30,14 +30,17 @@ public class Instantiation implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        var cliente = new Cliente(null, "Romildo", "99999-9999", "teste@teste.com", null, null);
-        var endereco = new Endereco(null, "Rua Romis", "Casa 1", "01234-567", "Teste City", "Teste", "TT", cliente);
-        var pet = new Pet(null, "Bill", "RND", null, cliente);
-        var agenda = new Agenda(null, LocalDate.now(), pet);
 
-        clienteRepository.save(cliente);
+        var endereco = new Endereco(null, "Rua Romis", "Casa 1", "01234-567", "Teste City", "Teste", "TT");
         enderecoRepository.save(endereco);
-        petRepository.save(pet);
+
+        var cliente = new Cliente(null, "Romildo", "99999-9999", "teste@teste.com", endereco);
+        cliente = clienteRepository.save(cliente);
+
+        var pet = new Pet(null, "Bill", "RND", cliente);
+        pet = petRepository.save(pet);
+
+        var agenda = new Agenda(null, LocalDate.now(), pet);
         agendaRepository.save(agenda);
 
     }

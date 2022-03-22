@@ -14,4 +14,5 @@ public class ClienteDto {
     private String nome;
     private String telefone;
     private String email;
+    private Long enderecoId;
 }

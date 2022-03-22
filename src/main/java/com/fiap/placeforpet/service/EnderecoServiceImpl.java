@@ -37,8 +37,10 @@ public class EnderecoServiceImpl implements EnderecoService {
         return enderecoRepository.save(endereco);
     }
 
-    public Endereco update(Endereco endereco) {
-        this.getById(endereco.getId());
+    public Endereco update(Long id, EnderecoDto enderecoDto) {
+        this.getById(id);
+        Endereco endereco = new Endereco(enderecoDto);
+        endereco.setId(id);
         return enderecoRepository.save(endereco);
     }
 

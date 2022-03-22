@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.List;
@@ -24,11 +26,9 @@ public class Cliente {
     private String telefone;
     private String email;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "cliente")
-    private List<Pet> pet;
-
-    @OneToOne(mappedBy = "cliente")
+    @OneToOne(cascade = CascadeType.REFRESH)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "ID_ENDERECO")
     private Endereco endereco;
 }
 

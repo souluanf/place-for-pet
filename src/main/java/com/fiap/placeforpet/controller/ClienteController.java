@@ -35,8 +35,9 @@ public class ClienteController {
     }
 
     @PutMapping(value = "{id}")
-    public Cliente update(@RequestBody Cliente cliente)   {
-        return clienteService.update(cliente);
+    public Cliente update(@PathVariable Long id,
+                          @RequestBody ClienteDto clienteDto)   {
+        return clienteService.update(id,clienteDto);
     }
 
     @DeleteMapping(value = "{id}")

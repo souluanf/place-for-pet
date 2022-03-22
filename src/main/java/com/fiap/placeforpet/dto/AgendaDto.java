@@ -1,5 +1,6 @@
 package com.fiap.placeforpet.dto;
 
+import com.fiap.placeforpet.entity.Pet;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,4 +15,5 @@ import java.time.LocalDate;
 public class AgendaDto {
 
     private LocalDate dataAgenda;
+    private Long petId;
 }

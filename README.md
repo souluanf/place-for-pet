@@ -17,7 +17,7 @@
 
 ## TL;DR
 
-##### Postman Documentation: https://documenter.getpostman.com/view/10016660/UVsQr3qw
+##### Postman Documentation: https://documenter.getpostman.com/view/18751134/UVsQsPqy
 ##### Github Repository: https://github.com/souluanf/place-for-pet
 ##### Docker Repository: https://hub.docker.com/repository/docker/souluanf/place-for-pet
 

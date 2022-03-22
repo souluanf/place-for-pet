@@ -12,4 +12,5 @@ import lombok.Setter;
 public class PetDto {
     private String nomePet;
     private String raca;
+    private Long clienteId;
 }

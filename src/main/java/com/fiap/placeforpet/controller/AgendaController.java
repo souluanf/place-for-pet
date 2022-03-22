@@ -1,7 +1,9 @@
 package com.fiap.placeforpet.controller;
 
 import com.fiap.placeforpet.dto.AgendaDto;
+import com.fiap.placeforpet.dto.EnderecoDto;
 import com.fiap.placeforpet.entity.Agenda;
+import com.fiap.placeforpet.entity.Endereco;
 import com.fiap.placeforpet.service.AgendaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -31,12 +33,16 @@ public class AgendaController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Agenda create(@RequestBody AgendaDto agendaDto) {
-        return agendaService.create(agendaDto);
+
+        Agenda agenda = agendaService.create(agendaDto);
+        return agenda;
     }
 
     @PutMapping(value = "{id}")
-    public Agenda update(@RequestBody Agenda agenda)   {
-        return agendaService.update(agenda);
+    public Agenda update(
+            @PathVariable Long id,
+            @RequestBody AgendaDto agendaDto)   {
+        return agendaService.update(id, agendaDto);
     }
 
     @DeleteMapping(value = "{id}")

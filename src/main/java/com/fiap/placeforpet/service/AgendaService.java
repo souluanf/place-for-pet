@@ -4,11 +4,10 @@ import com.fiap.placeforpet.dto.AgendaDto;
 import com.fiap.placeforpet.entity.Agenda;
 
 import java.util.List;
-
 public interface AgendaService {
-    Agenda create(AgendaDto agendaDto);
-    Agenda update(Agenda agenda);
-    void delete (Long id);
-    List<Agenda>getAll();
     Agenda getById(Long id);
+    List<Agenda>getAll();
+    Agenda create(AgendaDto agendaDto);
+    Agenda update(Long id, AgendaDto agendaDto);
+    void delete (Long id);
 }

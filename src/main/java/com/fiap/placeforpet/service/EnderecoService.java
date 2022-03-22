@@ -8,6 +8,6 @@ public interface EnderecoService {
     Endereco getById(Long id);
     List<Endereco>getAll();
     Endereco create(EnderecoDto enderecoDto);
-    Endereco update(Endereco endereco);
+    Endereco update(Long id, EnderecoDto enderecoDto);
     void delete (Long id);
 }

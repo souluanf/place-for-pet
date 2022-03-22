@@ -35,8 +35,9 @@ public class PetController {
     }
 
     @PutMapping(value = "{id}")
-    public Pet update(@RequestBody Pet pet)   {
-        return petService.update(pet);
+    public Pet update(@PathVariable Long id,
+                      @RequestBody PetDto petDto)   {
+        return petService.update(id, petDto);
     }
 
     @DeleteMapping(value = "{id}")
